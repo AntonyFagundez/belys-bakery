@@ -9,7 +9,7 @@ interface Props {
     products: Product[];
 }
 
-const IndexRoute: React.FC<Props> = ({ _products }) => {
+const IndexRoute: React.FC<Props> = ({ products }) => {
     return (
         <div>
             <Head>
