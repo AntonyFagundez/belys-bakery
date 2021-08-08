@@ -2,10 +2,16 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
+// import "@fontsource/noto-serif";
+
 const theme = extendTheme({
     colors: {
         primary: "#CCB568",
         secondary: "#2C3343",
+    },
+    fonts: {
+        heading: "Noto Serif",
+        link: "Noto Serif",
     },
 });
 

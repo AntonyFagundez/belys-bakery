@@ -9,7 +9,7 @@ interface Props {
     products: Product[];
 }
 
-const IndexRoute: React.FC<Props> = ({ products }) => {
+const IndexRoute: React.FC<Props> = ({ _products }) => {
     return (
         <div>
             <Head>
@@ -62,6 +62,10 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                 justifyContent="flex-end"
                 maxHeight="500px"
             >
+                <Box alignItems="center" display={{ base: "none", md: "flex" }}>
+                    {/* <Heading color="white">Siempre contigo</Heading> */}
+                </Box>
+
                 <Image alt="image home" display="flex" minWidth="320px" src="/home.jpeg" />
             </Box>
 
