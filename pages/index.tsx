@@ -1,6 +1,7 @@
-import { Box, Link, Image, Stack } from "@chakra-ui/react";
+import { Box, Link, Image, Stack, Heading } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import React from "react";
 
 import api from "../Product/api";
 import { Product } from "../Product/types";
@@ -14,10 +15,10 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
         <div>
             <Head>
                 <title>Bely&apos;s Bakery | Home</title>
-                <meta content=" Bely's Bakery Panadería Venezolana" name="description" />
-                <link href="/icon-light.png" rel="icon" />
             </Head>
+
             <Box
+                as="nav"
                 boxShadow="0px 3px 28px var(--chakra-colors-blackAlpha-200)"
                 display="flex"
                 height={"12"}
@@ -42,13 +43,28 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                             <Image alt="icon-navbar" src="/icon-nav.png" />
                         </Box>
                         <Box alignItems="center" display={{ base: "none", md: "flex" }}>
-                            <Link color="secondary" href="#" mx={"2"}>
+                            <Link
+                                color="secondary"
+                                fontFamily={`'DM Serif Text', serif`}
+                                href="#"
+                                mx={"2"}
+                            >
                                 Productos
                             </Link>
-                            <Link color="secondary" href="#" mx={"2"}>
+                            <Link
+                                color="secondary"
+                                fontFamily={`'DM Serif Text', serif`}
+                                href="#"
+                                mx={"2"}
+                            >
                                 Eventos
                             </Link>
-                            <Link color="secondary" href="#" mx={"2"}>
+                            <Link
+                                color="secondary"
+                                fontFamily={`'DM Serif Text', serif`}
+                                href="#"
+                                mx={"2"}
+                            >
                                 Contacto
                             </Link>
                         </Box>
@@ -56,10 +72,13 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                 </Stack>
             </Box>
             <Box
-                background="linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(178,161,105,1) 32%)"
+                background={{
+                    base: "none",
+                    md: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(178,161,105,1) 32%)",
+                }}
                 display="flex"
-                height={{ base: "300px", sm: "400px", md: "500px" }}
-                justifyContent="flex-end"
+                height={{ base: "200px", sm: "400px", md: "500px" }}
+                justifyContent={{ base: "center", md: "flex-end" }}
                 maxHeight="500px"
             >
                 <Box alignItems="center" display={{ base: "none", md: "flex" }}>
@@ -67,6 +86,17 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                 </Box>
 
                 <Image alt="image home" display="flex" minWidth="320px" src="/home.jpeg" />
+            </Box>
+
+            <Box
+                alignItems="center"
+                display="flex"
+                justifyContent={{ base: "center" }}
+                minHeight="100px"
+            >
+                <Heading color="secondary" fontWeight="normal">
+                    Productos
+                </Heading>
             </Box>
 
             {/* <main>{JSON.stringify(products)}</main> */}
