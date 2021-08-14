@@ -1,78 +1,97 @@
-import { Box, Input, InputGroup, InputLeftAddon, InputRightAddon } from "@chakra-ui/react";
+import { Button, FormLabel, Stack } from "@chakra-ui/react";
 import React from "react";
 
 interface CounterProps {
-    add: VoidFunction;
-    rest: VoidFunction;
+    onAddClick: VoidFunction;
+    onSubstractClick: VoidFunction;
     value: number;
+    disablePadNumber?: boolean;
 }
 
-export const Counter = ({ add, rest, value }: CounterProps) => {
+export const Counter = ({
+    onAddClick,
+    onSubstractClick,
+    value,
+    disablePadNumber = true,
+}: CounterProps) => {
     return (
         <>
-            <Box display="grid" gridTemplateColumns="30px auto 30px" maxWidth="87px">
-                <Box as="button" bg="red.400" borderRadius="50%" boxSize="30px" onClick={rest}>
-                    -
-                </Box>
-                <Box color="secondary">
-                    <Input
-                        borderStyle="solid"
-                        height="inherit"
-                        minWidth="50px"
-                        placeholder="Agrega"
-                        type="number"
-                        value={value}
-                    />
-                </Box>
-                <Box as="button" bg="green.400" borderRadius="50%" boxSize="30px" onClick={add}>
-                    +
-                </Box>
-            </Box>
-
-            <InputGroup alignItems="center" size="sm">
-                <InputLeftAddon
-                    as="button"
-                    bg="red.400"
-                    borderBottomRightRadius="50%"
-                    borderColor="red.400"
-                    borderInlineEndColor="red.400"
+            <Stack
+                alignItems="center"
+                display="grid"
+                gridAutoFlow="column"
+                gridTemplateColumns="28px 28px 28px"
+                size="sm"
+            >
+                <Button
+                    _active={{
+                        bg: "red.400",
+                        transform: "scale(0.98)",
+                        borderColor: "var(--chakra-colors-red-600)",
+                    }}
+                    _focus={{
+                        boxShadow:
+                            "0 0 1px 3px var(--chakra-colors-red-400),0 2px 2px var(--chakra-colors-red-400)",
+                    }}
                     borderRadius="50%"
-                    borderTopRightRadius="50%"
-                    // borderWidth="7px"
-                    boxSizing="content-box"
                     color="white"
-                    fontSize="30px"
+                    colorScheme="red"
+                    fontSize="23px"
                     fontWeight="bold"
-                    justifyContent="center"
-                    mr="-8px"
-                    paddingInline="6px"
-                    zIndex={2}
-                    onClick={rest}
-                >
-                    -
-                </InputLeftAddon>
-                <Input height="25px" value={value} width="50px" zIndex={0} />
-                <InputRightAddon
-                    as="button"
-                    bg="green.400"
-                    borderBottomLeftRadius="50%"
-                    borderColor="green.400"
-                    borderInlineStartColor="green.400"
-                    borderRadius="50%"
-                    borderTopLeftRadius="50%"
-                    // borderWidth="7px"
-                    boxSizing="content-box"
-                    color="white"
-                    fontSize="30px"
-                    fontWeight="bold"
-                    ml="-8px"
-                    paddingX="6px"
+                    height={7}
+                    minWidth={7}
+                    paddingX="0px"
                     zIndex={1}
-                    onClick={add}
+                    onClick={onSubstractClick}
+                >
+                    -
+                </Button>
+                <FormLabel
+                    bg="#fafafa"
+                    boxShadow="0px 0px 0px 2px rgb(0 0 0 / 25%)"
+                    color="#757575"
+                    height="20px"
+                    marginLeft="-12px !important"
+                    marginTop="0px !important"
+                    pointerEvents="none"
+                    textAlign="center"
+                    userSelect="none"
+                    width="50px"
+                    zIndex={0}
+                >
+                    {" "}
+                    {value > 0 && value < 10 && !disablePadNumber
+                        ? value.toString().padStart(2, "0")
+                        : value}
+                </FormLabel>
+                <Button
+                    _active={{
+                        bg: "green.400",
+                        transform: "scale(0.98)",
+                        borderColor: "var(--chakra-colors-green-600)",
+                    }}
+                    _focus={{
+                        boxShadow:
+                            "0 0 1px 3px var(--chakra-colors-green-400),0 2px 2px var(--chakra-colors-green-400)",
+                    }}
+                    _hover={{
+                        bg: "#85E264",
+                    }}
+                    bg="#70d84a"
+                    borderRadius="50%"
+                    color="white"
+                    fontSize="20px"
+                    fontWeight="bold"
+                    height={7}
+                    marginTop="0px !important"
+                    minWidth={7}
+                    paddingX="0px"
+                    zIndex={1}
+                    onClick={onAddClick}
                 >
                     +
-                </InputRightAddon>
-            </InputGroup>
+                </Button>
+            </Stack>
         </>
     );
 };

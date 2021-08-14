@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Counter } from "../components/Counter";
+import useCounter from "../hooks/useCounter";
 
 export default {
     title: "components/Counter",
@@ -11,13 +12,10 @@ export default {
     },
 } as ComponentMeta<typeof Counter>;
 
-const Template: ComponentStory<typeof Counter> = ({ value = 0 }) => {
-    const [state, setState] = React.useState(value);
+const Template: ComponentStory<typeof Counter> = ({ value: initValue }) => {
+    const { value, add, substract } = useCounter(initValue);
 
-    const handleAdd = () => setState(state + 1);
-    const handleRest = () => setState(state - 1);
-
-    return <Counter add={handleAdd} rest={handleRest} value={state} />;
+    return <Counter value={value} onAddClick={add} onSubstractClick={substract} />;
 };
 
 export const Primary = Template.bind({});
