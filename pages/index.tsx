@@ -3,9 +3,10 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import React from "react";
 
-import api from "../Product/api";
+// import api from "../Product/api";
 import { Product } from "../Product/types";
-
+import data from "../data";
+import { CardProduct } from "../components/CardProduct";
 interface Props {
     products: Product[];
 }
@@ -46,7 +47,7 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                             <Link
                                 color="secondary"
                                 fontFamily={`'DM Serif Text', serif`}
-                                href="#"
+                                href="#productos"
                                 mx={"2"}
                             >
                                 Productos
@@ -91,12 +92,35 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
             <Box
                 alignItems="center"
                 display="flex"
+                flexDirection="column"
                 justifyContent={{ base: "center" }}
                 minHeight="100px"
             >
-                <Heading color="secondary" fontWeight="normal">
+                <Heading color="secondary" fontWeight="normal" id="productos" mb="2" mt="10">
                     Productos
                 </Heading>
+                <Stack
+                    display="grid"
+                    gridGap="10"
+                    gridTemplateColumns={{
+                        base: "repeat(1, 350px)",
+                        md: "repeat(2, 350px)",
+                        lg: "repeat(3, 350px)",
+                    }}
+                    maxWidth="1200px"
+                >
+                    {products &&
+                        products.map(({ category: _categ, image, ...otherProps }, i) => (
+                            <CardProduct
+                                key={`Product-${otherProps.id}-${i}`}
+                                image={{
+                                    src: "https://dummyimage.com/135X135/969696/ffffff.png",
+                                    alt: otherProps.title,
+                                }}
+                                {...otherProps}
+                            />
+                        ))}
+                </Stack>
             </Box>
 
             {/* <main>{JSON.stringify(products)}</main> */}
@@ -105,11 +129,10 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const products = await api.list();
-
+    // const products = await api.list();
     return {
         props: {
-            products,
+            products: data,
         },
         revalidate: 86400,
     };
