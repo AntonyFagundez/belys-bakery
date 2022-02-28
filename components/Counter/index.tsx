@@ -36,9 +36,12 @@ export const Counter = ({
                     borderRadius="50%"
                     color="white"
                     colorScheme="red"
-                    fontSize="23px"
+                    flexDirection={"column"}
+                    fontSize="25px"
                     fontWeight="bold"
                     height={7}
+                    justifyContent="flex-end"
+                    lineHeight="initial"
                     minWidth={7}
                     paddingX="0px"
                     zIndex={1}
@@ -47,10 +50,13 @@ export const Counter = ({
                     -
                 </Button>
                 <FormLabel
+                    alignItems={"center"}
                     bg="#fafafa"
                     boxShadow="0px 0px 0px 2px rgb(0 0 0 / 25%)"
                     color="#757575"
+                    display="flex"
                     height="20px"
+                    justifyContent={"center"}
                     marginLeft="-12px !important"
                     marginTop="0px !important"
                     pointerEvents="none"
@@ -77,15 +83,16 @@ export const Counter = ({
                     _hover={{
                         bg: "#85E264",
                     }}
+                    alignItems="flex-start"
                     bg="#70d84a"
                     borderRadius="50%"
                     color="white"
                     fontSize="20px"
                     fontWeight="bold"
                     height={7}
-                    marginTop="0px !important"
+                    marginTop="0 !important"
                     minWidth={7}
-                    paddingX="0px"
+                    paddingX="0"
                     zIndex={1}
                     onClick={onAddClick}
                 >

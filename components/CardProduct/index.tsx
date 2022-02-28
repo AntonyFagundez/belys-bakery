@@ -2,27 +2,39 @@ import React from "react";
 import { Box, Image, ImageProps, Text, Stack } from "@chakra-ui/react";
 
 import { Counter } from "../Counter";
+import { useShoppingCart } from "../../atoms/shoppingCart";
 
 interface CardProductProps {
     id: string;
     image: ImageProps;
     title: string;
     price: number;
-    description?: string;
+    description: string;
 }
 
-export const CardProduct = ({
-    image = { src: "https://dummyimage.com/135X135/969696/ffffff.png", alt: "image-photo" },
-    title,
-    price,
-    description,
-}: CardProductProps) => {
+export const CardProduct = (props: CardProductProps) => {
+    const {
+        image = { src: "https://dummyimage.com/135X135/969696/ffffff.png", alt: "image-photo" },
+        title,
+        price,
+        description,
+        id,
+    } = props;
+    const { add, getCount, remove } = useShoppingCart();
+
+    const count = getCount(id);
+    const handleAdd = React.useCallback(
+        () => add({ ...props, category: "product", image: image.src as string }),
+        [add, props, image.src]
+    );
+    const handleSubs = React.useCallback(() => remove(props.id), [remove, props.id]);
+
     return (
         <Box
             _after={{
                 borderTopRightRadius: "25px",
                 borderBottomRightRadius: "25px",
-                boxShadow: "1px 1px 5px 5px rgba(0,0,0,0.15)",
+                boxShadow: ["", "1px 1px 5px 3px rgba(0,0,0,0.15)"],
                 content: "''",
                 display: "inherit",
                 position: "absolute",
@@ -30,12 +42,12 @@ export const CardProduct = ({
                 width: "225px",
                 zIndex: "-2",
                 bgColor: "transparent",
-                marginLeft: "118px",
+                marginLeft: ["80px", "118px"],
                 marginTop: "10px",
             }}
             _before={{
                 borderRadius: "50%",
-                boxShadow: "1px 1px 5px 5px rgba(0,0,0,0.15)",
+                boxShadow: ["", "1px 1px 5px 3px rgba(0,0,0,0.15)"],
                 content: "''",
                 display: "inherit",
                 position: "absolute",
@@ -44,13 +56,15 @@ export const CardProduct = ({
                 zIndex: "-1",
                 bgColor: "transparent",
             }}
+            borderBottom={["1px solid #e6e6e6", "unset"]}
             display="grid"
             gridTemplateColumns="145px auto"
             height="145px"
+            maxWidth={"100%"}
             width="335px"
         >
-            <Box bg="white" border="white solid 5px" borderRadius="50%" zIndex={1}>
-                <Image {...image} alt={image.alt ?? ""} borderRadius="50%" />
+            <Box bg="white" border={["", "white solid 5px"]} borderRadius={["", "50%"]} zIndex={1}>
+                <Image {...image} alt={image.alt ?? ""} borderRadius={["", "50%"]} />
             </Box>
             <Box
                 alignSelf="center"
@@ -60,7 +74,7 @@ export const CardProduct = ({
                 color="#2C3343"
                 height="125px"
                 marginLeft="-35px"
-                padding="10px 10px 0px 40px"
+                padding={["10px 10px 0px 40px", "10px 10px 0px 40px"]}
             >
                 <Stack
                     display="flex"
@@ -82,7 +96,7 @@ export const CardProduct = ({
                     {description}
                 </Text>
                 <Stack display="flex" flexDirection="row" justifyContent="center">
-                    <Counter value={0} onAddClick={() => {}} onSubstractClick={() => {}} />
+                    <Counter value={count} onAddClick={handleAdd} onSubstractClick={handleSubs} />
                 </Stack>
             </Box>
         </Box>
