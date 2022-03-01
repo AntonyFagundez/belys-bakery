@@ -22,11 +22,19 @@ interface ISidebarProps {
 const Sidebar = ({ btnRef, isOpen, onClose }: ISidebarProps) => {
     return (
         <>
-            <Drawer finalFocusRef={btnRef} isOpen={isOpen} placement="right" onClose={onClose}>
+            <Drawer
+                finalFocusRef={btnRef}
+                isOpen={isOpen}
+                placement="right"
+                size="md"
+                onClose={onClose}
+            >
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
-                    <DrawerHeader>Finalizar pedido</DrawerHeader>
+                    <DrawerHeader color="secondary" fontSize={"3xl"}>
+                        Finalizar pedido
+                    </DrawerHeader>
 
                     <DrawerBody>
                         <ShoppingCart />
@@ -36,7 +44,15 @@ const Sidebar = ({ btnRef, isOpen, onClose }: ISidebarProps) => {
                         <Button mr={3} variant="outline" onClick={onClose}>
                             Cancelar
                         </Button>
-                        <Button colorScheme="blue">Hacer pedido</Button>
+                        <Button
+                            _hover={{
+                                bgColor: "primary",
+                            }}
+                            bgColor="secondary"
+                            color="white"
+                        >
+                            Hacer pedido
+                        </Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>

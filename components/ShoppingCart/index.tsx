@@ -4,23 +4,19 @@ import React from "react";
 import { useShoppingCart } from "../../atoms/shoppingCart";
 
 const ShoppingCart = () => {
-    const { cart, getCount } = useShoppingCart();
-
-    const total = cart.reduce((acc, item) => acc + item.price, 0);
-    //get unique items by title
+    const { total, filteredCart, getCount } = useShoppingCart();
 
     return (
         <Table variant="simple">
-            {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
             <Thead>
                 <Tr>
                     <Th>Item</Th>
-                    <Th>Cantidad</Th>
+                    <Th isNumeric>Cantidad</Th>
                     <Th isNumeric>Precio por unidad</Th>
                 </Tr>
             </Thead>
             <Tbody>
-                {cart.map((item) => (
+                {filteredCart.map((item) => (
                     <Tr key={item.id}>
                         <Td>{item.title}</Td>
                         <Td isNumeric>{getCount(item.id)}</Td>

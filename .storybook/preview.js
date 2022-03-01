@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import {theme} from "../pages/_app"
+import { RecoilRoot } from "recoil";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,9 +15,11 @@ export const parameters = {
 const withChakra = (StoryFn) => {
 
   return (
-    <ChakraProvider theme={theme}>
-      <StoryFn />
-    </ChakraProvider>
+    <RecoilRoot>
+      <ChakraProvider theme={theme}>
+        <StoryFn />
+      </ChakraProvider>
+    </RecoilRoot>
   )
 }
 

@@ -6,7 +6,7 @@ import { useShoppingCart } from "../../atoms/shoppingCart";
 
 interface CardProductProps {
     id: string;
-    image: ImageProps;
+    image?: ImageProps;
     title: string;
     price: number;
     description: string;

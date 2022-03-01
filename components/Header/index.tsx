@@ -12,6 +12,7 @@ interface IHeaderProps {
 
 const Header = ({ btnRef, onOpen }: IHeaderProps) => {
     const { cart } = useShoppingCart();
+    const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
 
     return (
         <Box
@@ -51,7 +52,7 @@ const Header = ({ btnRef, onOpen }: IHeaderProps) => {
                         <Link
                             color="secondary"
                             fontFamily={`'DM Serif Text', serif`}
-                            href="#"
+                            href="#eventos"
                             mx={"2"}
                         >
                             Eventos
@@ -64,11 +65,11 @@ const Header = ({ btnRef, onOpen }: IHeaderProps) => {
                         >
                             Contacto
                         </Link>
-                        {cart.length > 0 && (
+                        {totalCount > 0 && (
                             <IconButton
                                 ref={btnRef as React.LegacyRef<HTMLButtonElement> | undefined}
                                 _before={{
-                                    content: `"${cart.length}"`,
+                                    content: `"${totalCount}"`,
                                     display: "block",
                                     fontSize: "12px",
                                     fontWeight: "bold",
