@@ -1,19 +1,36 @@
 import React from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 
 import type { Product } from "../Product/types";
 import data from "../data";
 
-export const shoppingCart = atom<(Product & { count: number })[]>({
+export interface ShoppingItem extends Product {
+    count: number;
+}
+
+export const shoppingCart = atom<ShoppingItem[]>({
     key: "shoppingCartState",
     default: data.map((product) => ({ ...product, count: 0 })),
 });
 
-export const useShoppingCart = () => {
-    const [cart, setCart] = useRecoilState(shoppingCart);
+const shoppingCartSelector = selector({
+    key: "shoppingCartSelector", // unique ID (with respect to other atoms/selectors)
+    get: ({ get }) => {
+        const cart = get(shoppingCart);
+        const filteredCart = cart.filter((item) => item.count > 0);
+        const total = filteredCart.reduce((acc, item) => acc + item.price * item.count, 0);
 
-    const filteredCart = cart.filter((item) => item.count > 0);
-    const total = filteredCart.reduce((acc, item) => acc + item.price * item.count, 0);
+        return {
+            cart,
+            filteredCart,
+            total,
+        };
+    },
+});
+
+export const useShoppingCart = () => {
+    const setCart = useSetRecoilState(shoppingCart);
+    const { cart, filteredCart, total } = useRecoilValue(shoppingCartSelector);
 
     const getCount = React.useCallback(
         (id: string) => {
