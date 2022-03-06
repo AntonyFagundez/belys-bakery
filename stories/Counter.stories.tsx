@@ -1,22 +1,24 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Counter } from "../components/Counter";
-import useCounter from "../hooks/useCounter";
+import Counter from "../components/Counter";
 
 export default {
     title: "components/Counter",
     component: Counter,
     argTypes: {
-        backgroundColor: { control: "color" },
+        value: { type: "number" },
+        onAddClick: { type: "function" },
+        onSubstractClick: { type: "function" },
+    },
+    parameters: {
+        actions: {
+            argTypesRegex: "^on[A-Z].*",
+        },
     },
 } as ComponentMeta<typeof Counter>;
 
-const Template: ComponentStory<typeof Counter> = ({ value: initValue }) => {
-    const { value, add, substract } = useCounter(initValue);
-
-    return <Counter value={value} onAddClick={add} onSubstractClick={substract} />;
-};
+const Template: ComponentStory<typeof Counter> = (args) => <Counter {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

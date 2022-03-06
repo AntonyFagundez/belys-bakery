@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Image, ImageProps, Text, Stack } from "@chakra-ui/react";
 
-import { Counter } from "../Counter";
+import Counter from "../Counter";
 import { useShoppingCart } from "../../atoms/shoppingCart";
 
 interface CardProductProps {
