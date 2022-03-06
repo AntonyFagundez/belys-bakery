@@ -20,6 +20,7 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
             </Head>
 
             <Box
+                as="section"
                 background={{
                     base: "none",
                     md: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(178,161,105,1) 32%)",
@@ -28,8 +29,9 @@ const IndexRoute: React.FC<Props> = ({ products }) => {
                 height={{ base: "200px", sm: "400px", md: "500px" }}
                 justifyContent={{ base: "center", md: "flex-end" }}
                 maxHeight="500px"
+                objectFit="cover"
             >
-                <Image alt="image home" display="flex" minWidth="320px" src="/home.jpeg" />
+                <Image alt="banner-home" display="flex" minWidth="320px" src="/home.jpeg" />
             </Box>
 
             <ProductsSection data={products} />
