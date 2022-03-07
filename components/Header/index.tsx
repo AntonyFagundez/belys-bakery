@@ -1,12 +1,11 @@
-import { Box, Link, Stack, Image, IconButton } from "@chakra-ui/react";
+import { Box, Link, Stack, Image } from "@chakra-ui/react";
 import React from "react";
-import type { FocusableElement } from "@chakra-ui/utils";
-import { HiShoppingCart } from "react-icons/hi";
 
 import { useShoppingCart } from "../../atoms/shoppingCart";
+import ShopButton from "../ShopButton";
 
 interface IHeaderProps {
-    btnRef?: React.RefObject<FocusableElement>;
+    btnRef?: React.Ref<HTMLButtonElement>;
     onOpen: () => void;
 }
 
@@ -66,29 +65,7 @@ const Header = ({ btnRef, onOpen }: IHeaderProps) => {
                             Contacto
                         </Link>
                         {totalCount > 0 && (
-                            <IconButton
-                                ref={btnRef as React.LegacyRef<HTMLButtonElement> | undefined}
-                                _before={{
-                                    content: `"${totalCount}"`,
-                                    display: "block",
-                                    fontSize: "12px",
-                                    fontWeight: "bold",
-                                    lineHeight: "1",
-                                    position: "absolute",
-                                    left: "0",
-                                    bottom: "0",
-                                    transform: "translateY(15%)",
-                                    backgroundColor: "var(--chakra-colors-secondary)",
-                                    color: "white",
-                                    padding: "0.35em 0.5em",
-                                    borderRadius: "50%",
-                                }}
-                                aria-label="shopping-cart-nav"
-                                height={"35px"}
-                                icon={<HiShoppingCart size={20} />}
-                                marginLeft={"30px"}
-                                onClick={onOpen}
-                            />
+                            <ShopButton ref={btnRef} count={totalCount} onOpen={onOpen} />
                         )}
                     </Box>
                 </Box>
