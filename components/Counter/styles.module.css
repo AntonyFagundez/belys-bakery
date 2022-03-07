@@ -1,0 +1,29 @@
+.enter {
+  opacity  : 0;
+  transform: translateY(-100%);
+}
+
+.enter-active {
+  opacity  : 1;
+  transform: translateY(0%);
+}
+
+.exit {
+  opacity  : 1;
+  transform: translateY(0%);
+}
+
+.exit-active {
+  opacity  : 0;
+  transform: translateY(100%);
+}
+
+.enter-active,
+.exit-active {
+  transition: opacity 150ms, transform 100ms;
+}
+
+.text {
+  background: rgb(42,64,116);
+  background: radial-gradient(circle, rgba(42,64,116,1) 36%, rgb(39 69 137) 24%)
+}
