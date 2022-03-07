@@ -41,36 +41,31 @@ export const useShoppingCart = () => {
     const add = React.useCallback(
         (product: Product) => {
             setCart((prev) => {
-                if (prev.some((p) => p.id === product.id)) {
-                    return prev.map((p) => {
-                        if (p.id === product.id) {
-                            return { ...p, count: p.count + 1 };
-                        }
+                return prev.map((prod) => {
+                    if (prod.id === product.id) {
+                        return {
+                            ...prod,
+                            count: prod.count + 1,
+                        };
+                    }
 
-                        return p;
-                    });
-                } else {
-                    return [...prev, { ...product, count: getCount(product.id) + 1 }];
-                }
+                    return prod;
+                });
             });
         },
-        [setCart, getCount]
+        [setCart]
     );
 
     const remove = React.useCallback(
         (id: string) => {
             setCart((prev) => {
-                if (prev.some((p) => p.id === id)) {
-                    return prev.map((p) => {
-                        if (p.id === id && p.count > 0) {
-                            return { ...p, count: p.count - 1 };
-                        }
+                return prev.map((p) => {
+                    if (p.id === id && p.count > 0) {
+                        return { ...p, count: p.count - 1 };
+                    }
 
-                        return p;
-                    });
-                }
-
-                return prev;
+                    return p;
+                });
             });
         },
         [setCart]
