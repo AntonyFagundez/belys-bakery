@@ -20,7 +20,7 @@ const CardEvent = ({
 
             <Box p="6">
                 <Box alignItems="baseline" display="flex">
-                    <Badge borderRadius="full" colorScheme="teal" px="2">
+                    <Badge borderRadius="full" colorScheme="facebook" px="2">
                         Nuevo
                     </Badge>
                     <Box
